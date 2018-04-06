@@ -27,7 +27,9 @@ export class LivroComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Submetendo formulario...', this.livroForm.get('nome').value);
+    const livro = this.livroForm.value;
+
+    console.log('Livro: ', livro);
   }
 
   ngOnInit() {
