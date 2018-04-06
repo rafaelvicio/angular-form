@@ -26,10 +26,18 @@ export class LivroComponent implements OnInit {
     });
   }
 
+  rebuildForm() {
+    this.livroForm.reset();
+  }
+
   onSubmit() {
     const livro = this.livroForm.value;
 
     console.log('Livro: ', livro);
+  }
+
+  limpar() {
+    this.rebuildForm();
   }
 
   ngOnInit() {
