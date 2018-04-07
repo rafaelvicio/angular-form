@@ -26,7 +26,11 @@ export class LivroComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(10)
       ]],
-      autor: [null, Validators.required],
+      autor: [null, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(10)
+      ]],
       editora: [null, Validators.required],
       assuntos: this.fb.array([])
     });
@@ -40,10 +44,6 @@ export class LivroComponent implements OnInit {
     this.assuntos.push(this.fb.group(new Assunto()));
   }
 
-  rebuildForm() {
-    this.livroForm.reset();
-  }
-
   onSubmit() {
     const livro = this.livroForm.value;
 
@@ -51,7 +51,7 @@ export class LivroComponent implements OnInit {
   }
 
   limpar() {
-    this.rebuildForm();
+    this.livroForm.reset();
   }
 
   verificaValidTouched(campo: string) {
@@ -59,6 +59,20 @@ export class LivroComponent implements OnInit {
       !this.livroForm.get(campo).valid &&
       (this.livroForm.get(campo).touched || this.livroForm.get(campo).dirty)
     );
+  }
+
+  verificaTamanhoMaximoInvalido() {
+    const campo = this.livroForm.get('autor');
+    if (campo.errors) {
+      return campo.errors['maxlength'] && campo.touched;
+    }
+  }
+
+  verificaEmailInvalido() {
+    const campoEmail = this.livroForm.get('email');
+    if (campoEmail.errors) {
+      return campoEmail.errors['email'] && campoEmail.touched;
+    }
   }
 
   aplicaCssErro(campo) {
