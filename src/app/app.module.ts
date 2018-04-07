@@ -6,12 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LivroComponent } from './livro/livro/livro.component';
-
+import { MensagemErroComponent } from './mensagem-erro/mensagem-erro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LivroComponent
+    LivroComponent,
+    MensagemErroComponent
   ],
   imports: [
     BrowserModule,
