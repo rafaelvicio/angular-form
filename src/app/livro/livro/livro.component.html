@@ -10,24 +10,62 @@
 
       <app-mensagem-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Nome é obrigatório.">
       </app-mensagem-erro>
+
+      <app-mensagem-erro [mostrarErro]="verificaTamanhoMinimoInvalido('nome')" msgErro="Tamanho minino de 3 caracteres">
+      </app-mensagem-erro>
+
+      <app-mensagem-erro [mostrarErro]="verificaTamanhoMaximoInvalido('nome')" msgErro="Tamanho maximo de 10 caracteres">
+      </app-mensagem-erro>
+
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="aplicaCssErro('email')">
+    <div class="col-sm-12">
+      <label for="email" class="control-label">Email</label>
+    </div>
+
+    <div class="col-sm-12">
+      <input type="email" class="form-control" formControlName="email" id="email" placeholder="Email">
+
+      <app-mensagem-erro [mostrarErro]="verificaValidTouched('email')" msgErro="Email é obrigatório.">
+      </app-mensagem-erro>
+
+      <app-mensagem-erro [mostrarErro]="verificaEmailInvalido('email')" msgErro="Email inválido.">
+      </app-mensagem-erro>
+
     </div>
   </div>
 
   <div class="form-group" [ngClass]="aplicaCssErro('autor')">
-      <div class="col-sm-12">
-        <label for="autor" class="control-label">Autor</label>
-      </div>
-  
-      <div class="col-sm-12">
-        <input type="text" class="form-control" formControlName="autor" id="autor" placeholder="Autor">
-  
-        <app-mensagem-erro [mostrarErro]="verificaValidTouched('autor')" msgErro="Autor é obrigatório.">
-        </app-mensagem-erro>
-
-        <app-mensagem-erro [mostrarErro]="verificaTamanhoMaximoInvalido('autor')" msgErro="Tamanho maximo de 10 caracteres">
-          </app-mensagem-erro>
-      </div>
+    <div class="col-sm-12">
+      <label for="autor" class="control-label">Autor</label>
     </div>
+
+    <div class="col-sm-12">
+      <input type="text" class="form-control" formControlName="autor" id="autor" placeholder="Autor">
+
+      <app-mensagem-erro [mostrarErro]="verificaValidTouched('autor')" msgErro="Autor é obrigatório.">
+      </app-mensagem-erro>
+
+      <app-mensagem-erro [mostrarErro]="verificaTamanhoMinimoInvalido('autor')" msgErro="Tamanho minino de 3 caracteres">
+      </app-mensagem-erro>
+
+      <app-mensagem-erro [mostrarErro]="verificaTamanhoMaximoInvalido('autor')" msgErro="Tamanho maximo de 10 caracteres">
+      </app-mensagem-erro>
+
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="aplicaCssErro('editora')">
+    <div class="col-sm-12">
+      <label for="editora" class="control-label">Editora</label>
+    </div>
+
+    <div class="col-sm-12">
+      <input type="text" class="form-control" formControlName="editora" id="editora" placeholder="Editora">
+    </div>
+  </div>
 
   <div style="margin-bottom: 1em">
     <button type="submit" class="btn btn-success">Cadastrar</button>

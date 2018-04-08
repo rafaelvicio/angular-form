@@ -26,28 +26,28 @@ export class LivroComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(10)
       ]],
+      email: [null, [
+        Validators.required,
+        Validators.email
+      ]],
       autor: [null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(10)
       ]],
-      editora: [null, Validators.required],
-      assuntos: this.fb.array([])
+      editora: [null]
     });
   }
 
-  get assuntos(): FormArray {
-    return this.livroForm.get('assuntos') as FormArray;
-  }
-
-  adicionarAssunto() {
-    this.assuntos.push(this.fb.group(new Assunto()));
-  }
-
   onSubmit() {
-    const livro = this.livroForm.value;
-
-    console.log('Livro: ', livro);
+    console.log(this.livroForm);
+    if (this.livroForm.valid) {
+      console.log('Formulario valido!');
+      const livro = this.livroForm.value;
+    } else {
+      console.log('Formulario não e valido');
+      this.verificaValidacoesForm(this.livroForm);
+    }
   }
 
   limpar() {
@@ -61,21 +61,38 @@ export class LivroComponent implements OnInit {
     );
   }
 
-  verificaTamanhoMaximoInvalido() {
-    const campo = this.livroForm.get('autor');
+  verificaEmailInvalido(campo: string) {
+    const campoForm = this.livroForm.get(campo);
+    if (campoForm.errors) {
+      return campoForm.errors['email'] && campoForm.touched;
+    }
+  }
+
+  verificaTamanhoMinimoInvalido(campo: any) {
     if (campo.errors) {
+      console.log('Tamanho minimo errado');
+      return campo.errors['minlength'] && campo.touched;
+    }
+  }
+
+  verificaTamanhoMaximoInvalido(campo: any) {
+    if (campo.errors) {
+      console.log('Tamanho maximo errado');
       return campo.errors['maxlength'] && campo.touched;
     }
   }
 
-  verificaEmailInvalido() {
-    const campoEmail = this.livroForm.get('email');
-    if (campoEmail.errors) {
-      return campoEmail.errors['email'] && campoEmail.touched;
-    }
+  verificaValidacoesForm(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(campo => {
+      const controle = formGroup.get(campo);
+      controle.markAsDirty();
+      if (controle instanceof FormGroup) {
+        this.verificaValidacoesForm(controle);
+      }
+    });
   }
 
-  aplicaCssErro(campo) {
+  aplicaCssErro(campo: string) {
     return {
       'has-error': this.verificaValidTouched(campo),
       'has-feedback': this.verificaValidTouched(campo)
