@@ -34,8 +34,7 @@ export class LivroComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(10)
-      ]],
-      editora: [null]
+      ]]
     });
   }
 
@@ -61,31 +60,35 @@ export class LivroComponent implements OnInit {
     );
   }
 
+  verificarObrigatorio(campo: string) {
+    const campoForm = this.livroForm.get(campo);
+    return campoForm.errors['required'] &&
+      this.livroForm.get(campo).touched || this.livroForm.get(campo).touched;
+  }
+
   verificaEmailInvalido(campo: string) {
     const campoForm = this.livroForm.get(campo);
-    if (campoForm.errors) {
-      return campoForm.errors['email'] && campoForm.touched;
-    }
+    return campoForm.errors['email'] &&
+      this.livroForm.get(campo).touched || this.livroForm.get(campo).touched;
   }
 
   verificaTamanhoMinimoInvalido(campo: any) {
-    if (campo.errors) {
-      console.log('Tamanho minimo errado');
-      return campo.errors['minlength'] && campo.touched;
-    }
+    const campoForm = this.livroForm.get(campo);
+    return campoForm.errors['minlength'] &&
+      this.livroForm.get(campo).touched || this.livroForm.get(campo).touched;
   }
 
   verificaTamanhoMaximoInvalido(campo: any) {
-    if (campo.errors) {
-      console.log('Tamanho maximo errado');
-      return campo.errors['maxlength'] && campo.touched;
-    }
+    const campoForm = this.livroForm.get(campo);
+    return campoForm.errors['maxlength'] &&
+      this.livroForm.get(campo).touched || this.livroForm.get(campo).touched;
   }
 
   verificaValidacoesForm(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(campo => {
       const controle = formGroup.get(campo);
       controle.markAsDirty();
+      controle.markAsTouched();
       if (controle instanceof FormGroup) {
         this.verificaValidacoesForm(controle);
       }

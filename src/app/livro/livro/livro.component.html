@@ -8,9 +8,9 @@
     <div class="col-sm-12">
       <input type="text" class="form-control" formControlName="nome" id="nome" placeholder="Nome">
 
-      <app-mensagem-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Nome é obrigatório.">
+      <app-mensagem-erro [mostrarErro]="verificarObrigatorio('nome')" msgErro="Tamanho minino de 3 caracteres">
       </app-mensagem-erro>
-
+     
       <app-mensagem-erro [mostrarErro]="verificaTamanhoMinimoInvalido('nome')" msgErro="Tamanho minino de 3 caracteres">
       </app-mensagem-erro>
 
@@ -28,9 +28,9 @@
     <div class="col-sm-12">
       <input type="email" class="form-control" formControlName="email" id="email" placeholder="Email">
 
-      <app-mensagem-erro [mostrarErro]="verificaValidTouched('email')" msgErro="Email é obrigatório.">
+      <app-mensagem-erro [mostrarErro]="verificarObrigatorio('email')" msgErro="Tamanho minino de 3 caracteres">
       </app-mensagem-erro>
-
+      
       <app-mensagem-erro [mostrarErro]="verificaEmailInvalido('email')" msgErro="Email inválido.">
       </app-mensagem-erro>
 
@@ -45,25 +45,15 @@
     <div class="col-sm-12">
       <input type="text" class="form-control" formControlName="autor" id="autor" placeholder="Autor">
 
-      <app-mensagem-erro [mostrarErro]="verificaValidTouched('autor')" msgErro="Autor é obrigatório.">
+      <app-mensagem-erro [mostrarErro]="verificarObrigatorio('autor')" msgErro="Tamanho minino de 3 caracteres">
       </app-mensagem-erro>
-
+      
       <app-mensagem-erro [mostrarErro]="verificaTamanhoMinimoInvalido('autor')" msgErro="Tamanho minino de 3 caracteres">
       </app-mensagem-erro>
 
       <app-mensagem-erro [mostrarErro]="verificaTamanhoMaximoInvalido('autor')" msgErro="Tamanho maximo de 10 caracteres">
       </app-mensagem-erro>
 
-    </div>
-  </div>
-
-  <div class="form-group" [ngClass]="aplicaCssErro('editora')">
-    <div class="col-sm-12">
-      <label for="editora" class="control-label">Editora</label>
-    </div>
-
-    <div class="col-sm-12">
-      <input type="text" class="form-control" formControlName="editora" id="editora" placeholder="Editora">
     </div>
   </div>
 
